@@ -1,14 +1,16 @@
 def isfloat(value,c):
-    try:
-        value=float(value)
-        if not value:
-            if c:
-                del(sp_act[3])
-                del(sp_act[4])
-            print('Зачем тебе "0" в калькуляторе?')
-        return True
-    except ValueError:
-        return False
+    if not (value==True or value==False):
+        try:
+            value=float(value)
+            if not value:
+                if c:
+                    del(sp_act[3])
+                    del(sp_act[4])
+                print('Зачем тебе "0" в калькуляторе?')
+            return True
+        except ValueError:
+            pass
+    return False
 
 def prov(type,inp='',c=0):
     while True:
