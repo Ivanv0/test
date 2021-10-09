@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    int a,b,c;
+    float a,b,c;
     cout << "Введите a, b и c" << endl;
     cin >> a >> b >> c;
     float d = pow(b,2)-4*a*c;
