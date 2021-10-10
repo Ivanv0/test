@@ -13,7 +13,7 @@ int main() {
         float x2 = (-b-sqrt(d))/(2*a);
         cout << "x1= " << x1 << "  x2= " << x2 << endl;
     } else if (d==0) {
-        float x = -d/2*a;
+        float x = -b/2*a;
         cout << "x= " << x << endl;
     } else cout << "d<0" << endl;
 }
