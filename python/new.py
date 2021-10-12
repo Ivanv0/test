@@ -1,29 +1,35 @@
-def isfloat(value,c):
+def isfloat(value):
     try:
-        value=float(value)
-        if not value:
-            if c:
-                del(sp_act[3])
-                del(sp_act[4])
-            print('Зачем тебе "0" в калькуляторе?')
+        value = float(value)
         return True
     except ValueError:
-        pass
+        print('Кажется это не число')
+    except:
+        print('Что-то не так')
     return False
 
-def prov(type,inp='',c=0):
+def num_check(inp_text=''):
     while True:
-        pr=input(inp)
-        if type=='chislo' and isfloat(pr,c):
-            return pr
-        elif type=='act' and pr in sp_act:
-            return pr
-        elif pr=='/' or pr=='//': print('Вселенная так схлопнется')
-        else: print('Что-то не так...')
+        current_input = input(inp_text)
+        if isfloat(current_input):
+            return current_input
 
-sp_act=['+','-','*','/','**','//']
+def sign_check(inp_text):
+    while True:
+        current_input = input(inp_text)
+        if current_input in ['+','-','*','/','**','//']:
+            return current_input
+        else:
+            print('Что-то не так')
 
-c1 = prov('chislo','Введите первое число: ')
-c2 = prov('chislo','Теперь второе: ',1)
-act = prov('act','Какое действие выполнить? ')
-print('Ответ:',eval(c1+act+c2))
+number_1 = num_check('Введите первое число: ')
+number_2 = num_check('Теперь второе: ')
+sign = sign_check('Какое действие выполнить? ')
+
+try:
+    answer = eval(number_1 + sign + number_2)
+    print('Ответ:', number_1, sign, number_2, '=', answer)
+except ZeroDivisionError:
+    print('Ты попытался разделить на ноль')
+except:
+    print('Что-то не так')
