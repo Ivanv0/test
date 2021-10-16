@@ -52,9 +52,13 @@ while True:
         if temp == -1:
             print("This key doesn't exist")
         else:
+            print('You have',table.value[temp],'in this key')
             try:
                 edit = int(input('Enter a variable change: '))
-                table.value[temp] += edit
+                if table.value[temp] + edit >= 0:
+                    table.value[temp] += edit
+                else:
+                    print("You don't have enough")
             except ValueError:
                 print('Error with int value')
     elif inp == 'print':
