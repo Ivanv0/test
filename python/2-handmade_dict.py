@@ -1,10 +1,16 @@
 # I didn't know what to do so I did that...
 
-class mytable:
+class Mytable:
     'Dict based on lists'
     def __init__(self):
         self.keys = []
         self.value = []
+
+    def get_keys(self):
+        return self.keys
+
+    def get_value(self):
+        return self.value
 
     def find_key(self,key):
         if key in self.keys:
@@ -12,7 +18,10 @@ class mytable:
         else:
             return -1
 
-    def check_value(self,key):
+    def edit(self,key,edit):
+        self.value[self.find_key(key)] += edit
+
+    def value_by_key(self,key):
         return self.value[self.find_key(key)]
 
     def append(self,key,value):
@@ -24,9 +33,9 @@ class mytable:
             print("It's empty")
         else:
             for i in self.keys:
-                print(i,' : ',self.check_value(i))
+                print(i,' : ',self.value_by_key(i))
 
-table=mytable()
+table=Mytable()
 print('Welcome to my improvised dictionary based on lists')
 print('''You can: [add] new, find out if the key [exist],
 [find] value by key, [edit] exist value or [print] all table''')
@@ -35,15 +44,28 @@ print('If you want to stop this, enter [exit]')
 while True:
     print('\nWrite down what you want to do\n')
     inp = input('> ')
+
+
     if inp == 'add':
         inp = input('Enter key and value: ').split()
-        if inp[0] in table.keys:
-            print('You already have this key, maybe you want edit?')
-        else:
-            try:
-                table.append(inp[0],int(inp[1]))
-            except ValueError:
-                print('Error with int value')
+        try:
+            inp[1] = int(inp[1])
+            index = table.find_key(inp[0])
+            print(inp)
+            if inp[0] in table.keys:
+                print('You already have this key')
+                if table.value[index] + inp[1] >= 0:
+                    print('Do you want to edit it?\n[y]es [n]o')
+                    if input() == 'y':
+                        table.edit(inp[0],inp[1])
+                        print('Now you have',table.value_by_key(inp[0]),'at',inp[0])
+            else:
+                table.append(inp[0],inp[1])
+                print('Success')
+        except ValueError:
+            print('Error with int value')
+
+
     elif inp == 'exist' or inp == 'find':
         temp = table.find_key(input('Enter key: '))
         if temp == -1:
@@ -59,7 +81,7 @@ while True:
             try:
                 edit = int(input('Enter a variable change: '))
                 if table.value[temp] + edit >= 0:
-                    table.value[temp] += edit
+                    table.edit(temp,edit)
                 else:
                     print("You don't have enough")
             except ValueError:
