@@ -37,7 +37,7 @@ while True:
     inp = input('> ')
     if inp == 'add':
         inp = input('Enter key and value: ').split()
-        if inp[0] in m.keys:
+        if inp[0] in table.keys:
             print('You already have this key, maybe you want edit?')
         else:
             try:
