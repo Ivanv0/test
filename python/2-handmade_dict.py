@@ -37,10 +37,13 @@ while True:
     inp = input('> ')
     if inp == 'add':
         inp = input('Enter key and value: ').split()
-        try:
-            table.append(inp[0],int(inp[1]))
-        except ValueError:
-            print('Error with int value')
+        if inp[0] in m.keys:
+            print('You already have this key, maybe you want edit?')
+        else:
+            try:
+                table.append(inp[0],int(inp[1]))
+            except ValueError:
+                print('Error with int value')
     elif inp == 'exist' or inp == 'find':
         temp = table.find_key(input('Enter key: '))
         if temp == -1:
