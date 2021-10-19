@@ -27,9 +27,12 @@ class Pedals(Engine):
         else:
             print('You need to start_engine first')
     def stop(self):
-        self.gas_pedal = False
-        self.brake_pedal = True
-        print('Stop')
+        if self.brake_pedal:
+            print('You already stoped')
+        else:
+            self.gas_pedal = False
+            self.brake_pedal = True
+            print('Stop')
 
 class Car(Pedals):
     'My fantasy is over'
