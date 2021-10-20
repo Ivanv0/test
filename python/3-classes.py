@@ -55,7 +55,7 @@ print('Your Car named "car"\n')
 
 while True:
     try:
-        exec(input())
+        eval(input())
     except KeyboardInterrupt:
         break
     except:
